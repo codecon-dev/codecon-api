@@ -3,7 +3,7 @@ FROM node:18-alpine
 # Install pnpm
 RUN npm install -g pnpm
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package.json, pnpm-lock.yaml and .npmrc (if you have one)
 COPY package.json pnpm-lock.yaml .npmrc* ./
