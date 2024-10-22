@@ -1,7 +1,9 @@
 .
 ├── README.md
 ├── instructions
+│   ├── action-plan.md
 │   ├── project.md
+│   ├── structure.md
 │   └── tree-codecon-api.md
 ├── nest-cli.json
 ├── package.json
@@ -18,4 +20,4 @@
 ├── tsconfig.build.json
 └── tsconfig.json
 
-4 directories, 15 files
+4 directories, 17 files
