@@ -1,105 +1,105 @@
 # CodeCon API
 
-[![https://img.shields.io/badge/made%20with-nestjs-red](https://img.shields.io/badge/made%20with-nestjs-E0234E)](https://nestjs.com/)
-[![https://img.shields.io/badge/database-postgresql-blue](https://img.shields.io/badge/database-postgresql-336791)](https://www.postgresql.org/)
+[![https://img.shields.io/badge/feito%20com-nestjs-red](https://img.shields.io/badge/feito%20com-nestjs-E0234E)](https://nestjs.com/)
+[![https://img.shields.io/badge/banco%20de%20dados-postgresql-blue](https://img.shields.io/badge/banco%20de%20dados-postgresql-336791)](https://www.postgresql.org/)
 [![https://img.shields.io/badge/powered%20by-supabase-green](https://img.shields.io/badge/powered%20by-supabase-3ECF8E)](https://supabase.com/)
 
-## 🌐 Quick Overview
+## 🌐 Visão Geral
 
-The CodeCon API is a NestJS-based project serving as the backbone for the CodeCon technology event. It centralizes user management, authentication, gamification features, and integrations with external systems.
+A API do CodeCon é um projeto baseado em NestJS que serve como espinha dorsal para a [CodeCon](https://codecon.dev). Ela centraliza o gerenciamento de usuários, autenticação, recursos de gamificação e integrações com sistemas externos.
 
-## 🚀 Key Features
+## 🚀 Principais Recursos
 
-- User authentication and registration
-- User profile management
-- Badge system and gamification
-- Integration with ticket selling platforms
-- Challenges and puzzles for participants
-- External system integrations via APIs and webhooks
+- Autenticação e registro de usuários
+- Gerenciamento de perfil de usuário
+- Sistema de emblemas e gamificação
+- Integração com plataformas de venda de ingressos
+- Desafios e quebra-cabeças para participantes
+- Integrações com sistemas externos via APIs e webhooks
 
-## 📘 Development Setup
+## 📘 Configuração de Desenvolvimento
 
-- Install [pnpm](https://pnpm.io/installation)
-- Install [Docker](https://docs.docker.com/get-docker/)
-- Install [Node.js](https://nodejs.org/) (version specified in `package.json`)
+- Instale o [pnpm](https://pnpm.io/installation)
+- Instale o [Docker](https://docs.docker.com/get-docker/)
+- Instale o [Node.js](https://nodejs.org/) (versão especificada no `package.json`)
 
-## 📗 Local Development
+## 📗 Desenvolvimento Local
 
-1. Clone the repository:
+1. Clone o repositório:
 
    ```sh
    git clone https://github.com/codecon-dev/codecon-api.git
    cd codecon-api
    ```
 
-2. Install dependencies:
+2. Instale as dependências:
 
    ```sh
    pnpm install
    ```
 
-3. Set up environment variables:
+3. Configure as variáveis de ambiente:
 
    ```sh
    cp .env.example .env
    ```
 
-   Edit the `.env` file and configure your environment variables.
+   Edite o arquivo `.env` e configure suas variáveis de ambiente.
 
-4. Start the PostgreSQL database:
+4. Inicie o banco de dados PostgreSQL:
 
    ```sh
    docker-compose up -d db
    ```
 
-5. Run the application in development mode:
+5. Execute a aplicação em modo de desenvolvimento:
    ```sh
    pnpm run start:dev
    ```
 
-The API will be available at http://localhost:3000/
+A API estará disponível em http://localhost:3000/
 
-## 🐳 Running with Docker
+## 🐳 Executando com Docker
 
-To run the entire application using Docker:
+Para executar toda a aplicação usando Docker:
 
-1. Make sure you have Docker and Docker Compose installed.
+1. Certifique-se de ter o Docker e o Docker Compose instalados.
 
-2. Build and start the containers:
+2. Construa e inicie os contêineres:
    ```sh
    docker-compose up --build
    ```
 
-This will start both the API and the PostgreSQL database. The API will be available at http://localhost:3000/
+Isso iniciará tanto a API quanto o banco de dados PostgreSQL. A API estará disponível em http://localhost:3000/
 
 ## 🛠 Scripts
 
-- `pnpm run start`: Start the application in production mode
-- `pnpm run start:dev`: Start the application in development mode with watch
-- `pnpm run start:prod`: Start the production build
-- `pnpm run build`: Build the application
-- `pnpm run test`: Run unit tests
-- `pnpm run test:e2e`: Run end-to-end tests
-- `pnpm run test:cov`: Run tests with coverage
-- `pnpm run tree`: Generate a tree of the project to be used in AI Prompts
+- `pnpm run start`: Inicia a aplicação em modo de produção
+- `pnpm run start:dev`: Inicia a aplicação em modo de desenvolvimento com watch
+- `pnpm run start:prod`: Inicia a build de produção
+- `pnpm run build`: Constrói a aplicação
+- `pnpm run test`: Executa testes unitários
+- `pnpm run test:e2e`: Executa testes end-to-end
+- `pnpm run test:cov`: Executa testes com cobertura
+- `pnpm run tree`: Gera uma árvore do projeto para ser usada em Prompts de IA
 
-## 🔒 Environment Variables
+## 🔒 Variáveis de Ambiente
 
-Make sure to set up the following environment variables in your `.env` file:
+Certifique-se de configurar as seguintes variáveis de ambiente no seu arquivo `.env`:
 
-- `DATABASE_URL`: PostgreSQL connection string
-- `SUPABASE_URL`: Supabase project URL
-- `SUPABASE_KEY`: Supabase API key
-- `RESEND_API_KEY`: Resend API key for email services
+- `DATABASE_URL`: String de conexão do PostgreSQL
+- `SUPABASE_URL`: URL do projeto Supabase
+- `SUPABASE_KEY`: Chave da API do Supabase
+- `RESEND_API_KEY`: Chave da API Resend para serviços de e-mail
 
-## 📚 API Documentation
+## 📚 Documentação da API
 
-API documentation is available at `/api-docs` when running the application. (TO-DO)
+A documentação da API está disponível em `/api-docs` ao executar a aplicação. (A FAZER)
 
-## 🤝 Contributing
+## 🤝 Contribuindo
 
-Please read our [Contributing Guide](CONTRIBUTING.md) before submitting a Pull Request to the project.
+Por favor, leia nosso [Guia de Contribuição](CONTRIBUTING.md) antes de enviar um Pull Request para o projeto.
 
-## 📄 License
+## 📄 Licença
 
-This project is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](LICENSE).
+Este projeto está licenciado sob a [Mozilla Public License 2.0 (MPL-2.0)](LICENSE).
