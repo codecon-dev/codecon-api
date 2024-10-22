@@ -4,7 +4,7 @@
   "description": "CodeCon API",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MPL-2.0",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

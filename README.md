@@ -28,7 +28,7 @@ The CodeCon API is a NestJS-based project serving as the backbone for the CodeCo
 1. Clone the repository:
 
    ```sh
-   git clone [repository-url]
+   git clone https://github.com/codecon-dev/codecon-api.git
    cd codecon-api
    ```
 
@@ -94,7 +94,7 @@ Make sure to set up the following environment variables in your `.env` file:
 
 ## 📚 API Documentation
 
-API documentation is available at `/api-docs` when running the application.
+API documentation is available at `/api-docs` when running the application. (TO-DO)
 
 ## 🤝 Contributing
 
@@ -102,8 +102,4 @@ Please read our [Contributing Guide](CONTRIBUTING.md) before submitting a Pull R
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
-
-## 📞 Support
-
-For support, please contact [support email or link to issue tracker].
+This project is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](LICENSE).
