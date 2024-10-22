@@ -7,11 +7,11 @@ export class AppController {
 
   @Get()
   async getHello(): Promise<string> {
-    const samples = await this.appService.getSamples();
-    if (samples.length > 0) {
-      return `Welcome to CodeCon API! We have ${samples.length} samples. First sample: ${samples[0].name}`;
+    const attendees = await this.appService.getAttendees();
+    if (attendees.length > 0) {
+      return `Welcome to CodeCon API! We have ${attendees.length} attendees. First attendee: ${attendees[0].name}`;
     } else {
-      return 'Welcome to CodeCon API! No samples available yet.';
+      return 'Welcome to CodeCon API! No attendees registered yet.';
     }
   }
 }

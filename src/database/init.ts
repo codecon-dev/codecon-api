@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import { createConnection } from 'typeorm';
-import { Sample } from '../entities/sample.entity';
+import { Attendee } from '../entities/attendee.entity';
 
 // Load environment variables
 config();
@@ -13,23 +13,23 @@ async function initializeDatabase() {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [Sample],
+    entities: [Attendee],
     synchronize: true, // Be careful with this in production
   });
 
-  const sampleRepository = connection.getRepository(Sample);
+  const attendeeRepository = connection.getRepository(Attendee);
 
-  const samples = [
-    { name: 'Sample 1', description: 'This is the first sample' },
-    { name: 'Sample 2', description: 'This is the second sample' },
-    { name: 'Sample 3', description: 'This is the third sample' },
+  const attendees = [
+    { name: 'John Doe', email: 'john@example.com', company: 'Tech Corp', points: 100 },
+    { name: 'Jane Smith', email: 'jane@example.com', company: 'Dev Inc', points: 150 },
+    { name: 'Bob Johnson', email: 'bob@example.com', company: 'Code LLC', points: 75 },
   ];
 
-  for (const sample of samples) {
-    await sampleRepository.save(sample);
+  for (const attendee of attendees) {
+    await attendeeRepository.save(attendee);
   }
 
-  console.log('Database initialized with sample data');
+  console.log('Database initialized with sample attendees');
   await connection.close();
 }
 

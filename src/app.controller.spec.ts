@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Sample } from './entities/sample.entity';
+import { Attendee } from './entities/attendee.entity';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -14,7 +14,7 @@ describe('AppController', () => {
       providers: [
         AppService,
         {
-          provide: getRepositoryToken(Sample),
+          provide: getRepositoryToken(Attendee),
           useValue: {
             find: jest.fn(),
           },
@@ -27,19 +27,19 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return welcome message with sample data when samples exist', async () => {
-      jest.spyOn(appService, 'getSamples').mockResolvedValue([
-        { id: 1, name: 'Sample 1', description: 'This is the first sample' },
-        { id: 2, name: 'Sample 2', description: 'This is the second sample' },
+    it('should return welcome message with attendee data when attendees exist', async () => {
+      jest.spyOn(appService, 'getAttendees').mockResolvedValue([
+        { id: '1', name: 'John Doe', email: 'john@example.com', company: 'Tech Corp', points: 100, createdAt: new Date(), updatedAt: new Date() },
+        { id: '2', name: 'Jane Smith', email: 'jane@example.com', company: 'Dev Inc', points: 150, createdAt: new Date(), updatedAt: new Date() },
       ]);
       const result = await appController.getHello();
-      expect(result).toBe('Welcome to CodeCon API! We have 2 samples. First sample: Sample 1');
+      expect(result).toBe('Welcome to CodeCon API! We have 2 attendees. First attendee: John Doe');
     });
 
-    it('should return welcome message without sample data when no samples exist', async () => {
-      jest.spyOn(appService, 'getSamples').mockResolvedValue([]);
+    it('should return welcome message without attendee data when no attendees exist', async () => {
+      jest.spyOn(appService, 'getAttendees').mockResolvedValue([]);
       const result = await appController.getHello();
-      expect(result).toBe('Welcome to CodeCon API! No samples available yet.');
+      expect(result).toBe('Welcome to CodeCon API! No attendees registered yet.');
     });
   });
 });
