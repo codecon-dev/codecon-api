@@ -18,7 +18,14 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:init": "ts-node src/database/init.ts"
+    "test:docker": "docker-compose run test",
+    "db:init": "docker-compose exec app npm run db:init",
+    "up": "docker compose up --build",
+    "down": "docker compose down",
+    "logs": "docker compose logs app",
+    "shell": "docker compose exec app sh",
+    "migrate": "docker compose exec app npm run migrate",
+    "seed": "docker compose exec app npm run seed"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.6",

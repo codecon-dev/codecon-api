@@ -21,4 +21,5 @@ EXPOSE 3000
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Use CMD instead of ENTRYPOINT to allow overriding
+CMD ["/docker-entrypoint.sh"]

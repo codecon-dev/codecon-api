@@ -21,6 +21,17 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  test:
+    build: .
+    command: pnpm test
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=your_password
+      - DB_NAME=codecon_api_test
+    depends_on:
+      - db
 
 volumes:
   postgres_data:
