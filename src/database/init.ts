@@ -20,9 +20,24 @@ async function initializeDatabase() {
   const attendeeRepository = connection.getRepository(Attendee);
 
   const attendees = [
-    { name: 'John Doe', email: 'john@example.com', company: 'Tech Corp', points: 100 },
-    { name: 'Jane Smith', email: 'jane@example.com', company: 'Dev Inc', points: 150 },
-    { name: 'Bob Johnson', email: 'bob@example.com', company: 'Code LLC', points: 75 },
+    {
+      name: 'John Doe',
+      email: 'john@example.com',
+      company: 'Tech Corp',
+      points: 100,
+    },
+    {
+      name: 'Jane Smith',
+      email: 'jane@example.com',
+      company: 'Dev Inc',
+      points: 150,
+    },
+    {
+      name: 'Bob Johnson',
+      email: 'bob@example.com',
+      company: 'Code LLC',
+      points: 75,
+    },
   ];
 
   for (const attendee of attendees) {
@@ -33,4 +48,6 @@ async function initializeDatabase() {
   await connection.close();
 }
 
-initializeDatabase().catch(error => console.error('Database initialization failed:', error));
+initializeDatabase().catch((error) =>
+  console.error('Database initialization failed:', error),
+);

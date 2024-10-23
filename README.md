@@ -61,16 +61,59 @@ A API estará disponível em http://localhost:3000/
 
 ## 🐳 Executando com Docker
 
-Para executar toda a aplicação usando Docker:
+Este projeto está configurado para ser executado inteiramente com Docker, incluindo tanto a aplicação quanto o banco de dados.
 
 1. Certifique-se de ter o Docker e o Docker Compose instalados.
 
-2. Construa e inicie os contêineres:
+2. Clone o repositório:
+
+   ```sh
+   git clone https://github.com/codecon-dev/codecon-api.git
+   cd codecon-api
+   ```
+
+3. Construa e inicie os contêineres:
+
    ```sh
    docker-compose up --build
    ```
 
-Isso iniciará tanto a API quanto o banco de dados PostgreSQL. A API estará disponível em http://localhost:3000/
+   Isso iniciará tanto a API quanto o banco de dados PostgreSQL. A API estará disponível em http://localhost:3000/
+
+4. Para parar os contêineres, use:
+   ```sh
+   docker-compose down
+   ```
+
+## 🛠 Desenvolvimento
+
+- Para ver os logs da aplicação:
+
+  ```sh
+  docker-compose logs app
+  ```
+
+- Para executar testes:
+
+  ```sh
+  docker-compose run app npm run test
+  ```
+
+- Para acessar o shell do contêiner da aplicação:
+
+  ```sh
+  docker-compose exec app sh
+  ```
+
+- Para inicializar o banco de dados com dados de exemplo (opcional):
+
+  ```sh
+  docker-compose exec app npm run db:init
+  ```
+
+  Nota: Use este comando com cautela em ambientes de produção, pois ele pode sobrescrever dados existentes.
+
+A partir daqui, você pode executar comandos npm, modificar arquivos (as alterações serão refletidas no contêiner) e realizar outras tarefas de desenvolvimento.
 
 ## 🛠 Scripts
 
@@ -94,7 +137,7 @@ Certifique-se de configurar as seguintes variáveis de ambiente no seu arquivo `
 
 ## 📚 Documentação da API
 
-A documentação da API está disponível em `/api-docs` ao executar a aplicação. (A FAZER)
+A documentação da API est�� disponível em `/api-docs` ao executar a aplicação. (A FAZER)
 
 ## 🤝 Contribuindo
 
