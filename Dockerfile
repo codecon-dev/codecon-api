@@ -17,4 +17,8 @@ RUN pnpm run build
 
 EXPOSE 3000
 
-CMD ["pnpm", "run", "start:prod"]
+# Copy the docker-entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
