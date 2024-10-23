@@ -23,42 +23,6 @@ A API do CodeCon é um projeto baseado em NestJS que serve como espinha dorsal p
 - Instale o [Docker](https://docs.docker.com/get-docker/)
 - Instale o [Node.js](https://nodejs.org/) (versão especificada no `package.json`)
 
-## 📗 Desenvolvimento Local
-
-1. Clone o repositório:
-
-   ```sh
-   git clone https://github.com/codecon-dev/codecon-api.git
-   cd codecon-api
-   ```
-
-2. Instale as dependências:
-
-   ```sh
-   pnpm install
-   ```
-
-3. Configure as variáveis de ambiente:
-
-   ```sh
-   cp .env.example .env
-   ```
-
-   Edite o arquivo `.env` e configure suas variáveis de ambiente.
-
-4. Inicie o banco de dados PostgreSQL:
-
-   ```sh
-   docker-compose up -d db
-   ```
-
-5. Execute a aplicação em modo de desenvolvimento:
-   ```sh
-   pnpm run start:dev
-   ```
-
-A API estará disponível em http://localhost:3000/
-
 ## 🐳 Executando com Docker
 
 Este projeto está configurado para ser executado inteiramente com Docker, incluindo tanto a aplicação quanto o banco de dados.
