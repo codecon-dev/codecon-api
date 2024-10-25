@@ -2,9 +2,9 @@ import { ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-import { UsersService } from '../users/users.service';
-import { AuthService } from './auth.service';
+import { CreateUserDto } from '../../users/dtos/create-user.dto';
+import { UsersService } from '../../users/services/users.service';
+import { AuthService } from '../services/auth.service';
 
 jest.mock('bcrypt');
 

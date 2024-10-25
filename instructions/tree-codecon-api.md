@@ -15,37 +15,43 @@
 ├── package.json
 ├── pnpm-lock.yaml
 ├── src
-│   ├── app.controller.spec.ts
 │   ├── app.controller.ts
 │   ├── app.module.ts
 │   ├── app.service.ts
-│   ├── auth
-│   │   ├── auth.controller.ts
-│   │   ├── auth.module.ts
-│   │   ├── auth.service.spec.ts
-│   │   ├── auth.service.ts
-│   │   ├── guards
-│   │   │   └── local-auth.guard.ts
-│   │   └── strategies
-│   │       ├── github.strategy.ts
-│   │       ├── google.strategy.ts
-│   │       ├── jwt.strategy.ts
-│   │       └── local.strategy.ts
-│   ├── database
-│   │   └── init.ts
-│   ├── entities
-│   │   └── attendee.entity.ts
+│   ├── config
+│   │   └── configuration.ts
 │   ├── main.ts
-│   └── users
-│       ├── dto
-│       │   └── create-user.dto.ts
-│       ├── entities
-│       │   └── user.entity.ts
-│       ├── users.module.ts
-│       └── users.service.ts
+│   └── modules
+│       ├── attendees
+│       │   └── entities
+│       │       └── attendee.entity.ts
+│       ├── auth
+│       │   ├── auth.module.ts
+│       │   ├── controllers
+│       │   │   └── auth.controller.ts
+│       │   ├── guards
+│       │   │   └── local-auth.guard.ts
+│       │   ├── services
+│       │   │   ├── auth.service.spec.ts
+│       │   │   └── auth.service.ts
+│       │   └── strategies
+│       │       ├── github.strategy.ts
+│       │       ├── google.strategy.ts
+│       │       ├── jwt.strategy.ts
+│       │       └── local.strategy.ts
+│       └── users
+│           ├── dtos
+│           │   └── create-user.dto.ts
+│           ├── entities
+│           │   └── user.entity.ts
+│           ├── services
+│           │   └── users.service.ts
+│           └── users.module.ts
 ├── test
-│   ├── app.e2e-spec.ts
+│   ├── app.controller.spec.ts
 │   ├── auth
+│   ├── e2e
+│   │   └── app.e2e-spec.ts
 │   └── jest-e2e.json
 ├── tsconfig.build.json
 └── tsconfig.json
