@@ -7,6 +7,7 @@
 ├── docker-entrypoint.sh
 ├── instructions
 │   ├── action-plan.md
+│   ├── code-review.md
 │   ├── project.md
 │   ├── structure.md
 │   └── tree-codecon-api.md
@@ -28,6 +29,7 @@
 │       ├── auth
 │       │   ├── auth.module.ts
 │       │   ├── controllers
+│       │   │   ├── auth.controller.spec.ts
 │       │   │   └── auth.controller.ts
 │       │   ├── guards
 │       │   │   └── local-auth.guard.ts
@@ -39,6 +41,10 @@
 │       │       ├── google.strategy.ts
 │       │       ├── jwt.strategy.ts
 │       │       └── local.strategy.ts
+│       ├── shared
+│       │   └── services
+│       │       ├── email.service.spec.ts
+│       │       └── email.service.ts
 │       └── users
 │           ├── dtos
 │           │   └── create-user.dto.ts
