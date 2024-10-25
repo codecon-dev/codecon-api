@@ -12,7 +12,7 @@ Content-Type: application/json
   "name": "Test User"
 }
 
-### Login
+### Login with email/password
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -21,6 +21,18 @@ Content-Type: application/json
   "password": "{{password}}"
 }
 
+### Request email login link
+POST {{baseUrl}}/auth/login/email
+Content-Type: application/json
+
+{
+  "email": "{{email}}"
+}
+
+### Verify email login token
+# Replace <token> with the token received in email or from the otpTokens Map
+GET {{baseUrl}}/auth/verify?token=<token>
+
 ### Get current user (Protected route)
 GET {{baseUrl}}/auth/me
 Authorization: Bearer {{authToken}}
@@ -28,13 +40,27 @@ Authorization: Bearer {{authToken}}
 ### Variables
 @authToken = # Paste the access_token from the login response here
 
-### Social Login (Simulated)
-POST {{baseUrl}}/auth/social
-Content-Type: application/json
+### Google OAuth Login (Redirect endpoint)
+GET {{baseUrl}}/auth/google
 
-{
-  "email": "social@example.com",
-  "name": "Social User",
-  "provider": "google",
-  "providerId": "googleId123"
-}
+### Google OAuth Callback (For documentation)
+GET {{baseUrl}}/auth/google/callback
+
+### GitHub OAuth Login (Redirect endpoint)
+GET {{baseUrl}}/auth/github
+
+### GitHub OAuth Callback (For documentation)
+GET {{baseUrl}}/auth/github/callback
+
+### Notes:
+# 1. For email login:
+#    - First use the "Request email login link" endpoint
+#    - Check your email for the token (or check the otpTokens Map in development)
+#    - Use that token in the "Verify email login token" endpoint
+#
+# 2. For social login:
+#    - Use the Google/GitHub endpoints in a browser
+#    - They will redirect to the OAuth provider
+#    - After authorization, you'll be redirected back to the callback URL
+#
+# 3. The @authToken variable should be set with the access_token from any successful login response

@@ -1,7 +1,8 @@
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
+import { EmailService } from '../../shared/services/email.service';
 import { CreateUserDto } from '../../users/dtos/create-user.dto';
 import { UsersService } from '../../users/services/users.service';
 import { AuthService } from '../services/auth.service';
@@ -12,6 +13,7 @@ describe('AuthService', () => {
   let authService: AuthService;
   let usersService: UsersService;
   let jwtService: JwtService;
+  let emailService: EmailService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -30,12 +32,19 @@ describe('AuthService', () => {
             sign: jest.fn(),
           },
         },
+        {
+          provide: EmailService,
+          useValue: {
+            sendLoginLink: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
     authService = module.get<AuthService>(AuthService);
     usersService = module.get<UsersService>(UsersService);
     jwtService = module.get<JwtService>(JwtService);
+    emailService = module.get<EmailService>(EmailService);
   });
 
   describe('register', () => {
@@ -153,6 +162,85 @@ describe('AuthService', () => {
       expect(result).toEqual({ access_token: token });
       expect(usersService.create).not.toHaveBeenCalled();
       expect(jwtService.sign).toHaveBeenCalledWith({ sub: 'existingUserId' });
+    });
+  });
+
+  describe('requestLoginLink', () => {
+    it('should send login link for existing user', async () => {
+      const email = 'test@example.com';
+      const user = { id: 'userId', email };
+
+      (usersService.findByEmail as jest.Mock).mockResolvedValue(user);
+
+      await authService.requestLoginLink(email);
+
+      expect(usersService.findByEmail).toHaveBeenCalledWith(email);
+      expect(emailService.sendLoginLink).toHaveBeenCalledWith(
+        email,
+        expect.any(String)
+      );
+    });
+
+    it('should not send login link for non-existing user', async () => {
+      const email = 'nonexistent@example.com';
+
+      (usersService.findByEmail as jest.Mock).mockResolvedValue(null);
+
+      await authService.requestLoginLink(email);
+
+      expect(usersService.findByEmail).toHaveBeenCalledWith(email);
+      expect(emailService.sendLoginLink).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('verifyLoginToken', () => {
+    it('should return access token for valid token', async () => {
+      const email = 'test@example.com';
+      const user = { id: 'userId', email };
+      const token = 'valid_token';
+      const jwtToken = 'jwt_token';
+      const expires = new Date();
+      expires.setMinutes(expires.getMinutes() + 15);
+
+      // Set up the token in the Map
+      (authService as any).otpTokens.set(token, { email, expires });
+
+      (usersService.findByEmail as jest.Mock).mockResolvedValue(user);
+      (jwtService.sign as jest.Mock).mockReturnValue(jwtToken);
+
+      const result = await authService.verifyLoginToken(token);
+
+      expect(result).toEqual({ access_token: jwtToken });
+      expect(usersService.findByEmail).toHaveBeenCalledWith(email);
+      expect(jwtService.sign).toHaveBeenCalledWith({ sub: user.id });
+      // Verify token was deleted
+      expect((authService as any).otpTokens.has(token)).toBeFalsy();
+    });
+
+    it('should throw UnauthorizedException for expired token', async () => {
+      const token = 'expired_token';
+      const expires = new Date();
+      expires.setMinutes(expires.getMinutes() - 1); // Set to past
+
+      (authService as any).otpTokens.set(token, {
+        email: 'test@example.com',
+        expires,
+      });
+
+      await expect(authService.verifyLoginToken(token))
+        .rejects
+        .toThrow(UnauthorizedException);
+
+      // Verify expired token was deleted
+      expect((authService as any).otpTokens.has(token)).toBeFalsy();
+    });
+
+    it('should throw UnauthorizedException for invalid token', async () => {
+      const token = 'invalid_token';
+
+      await expect(authService.verifyLoginToken(token))
+        .rejects
+        .toThrow(UnauthorizedException);
     });
   });
 });
