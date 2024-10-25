@@ -16,6 +16,7 @@ RUN pnpm install --frozen-lockfile --no-optional && \
     npm rebuild bcrypt --build-from-source
 
 COPY . .
+COPY .env .env
 
 RUN pnpm run build
 
@@ -30,3 +31,4 @@ ENV RESET_DB=false
 
 # Modify the CMD to check for database reset
 CMD ["sh", "-c", "if [ \"$RESET_DB\" = \"true\" ]; then pnpm run db:reset; else /docker-entrypoint.sh; fi"]
+

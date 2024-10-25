@@ -5,25 +5,14 @@ services:
       - '3000:3000'
     environment:
       - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=your_password
-      - DB_NAME=codecon_api
-      - JWT_SECRET=your_secret
-      - GOOGLE_CLIENT_ID=seu_google_client_id
-      - GOOGLE_CLIENT_SECRET=seu_google_client_secret
-      - GITHUB_CLIENT_ID=seu_github_client_id
-      - GITHUB_CLIENT_SECRET=seu_github_client_secret
-      - NODE_ENV=development
-      - SMTP_FROM=noreply@codecon.com
-      - APP_URL=http://localhost:3000
-      - RESEND_API_KEY=your_resend_api_key
     volumes:
       - .:/app
       - /app/node_modules
     depends_on:
       - db
     command: pnpm run start:dev
+    env_file:
+      - .env
   db:
     image: postgres:16
     environment:
