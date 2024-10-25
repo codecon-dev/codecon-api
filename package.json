@@ -25,7 +25,8 @@
     "logs": "docker compose logs app",
     "shell": "docker compose exec app sh",
     "migrate": "docker compose exec app npm run migrate",
-    "seed": "docker compose exec app npm run seed"
+    "seed": "docker compose exec app npm run seed",
+    "tree": "tree -L 3 -I 'node_modules|.git|dist|data' > instructions/tree-codecon-api.md"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.6",
