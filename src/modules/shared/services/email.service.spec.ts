@@ -1,21 +1,21 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import * as nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import { EmailService } from './email.service';
 
-jest.mock('nodemailer');
+jest.mock('resend', () => ({
+  Resend: jest.fn().mockImplementation(() => ({
+    emails: {
+      send: jest.fn().mockResolvedValue({ data: {}, error: null }),
+    },
+  })),
+}));
 
 describe('EmailService', () => {
   let service: EmailService;
-  let mockTransporter: any;
+  let mockResend: jest.Mocked<Resend>;
 
   beforeEach(async () => {
-    mockTransporter = {
-      sendMail: jest.fn().mockResolvedValue(true),
-    };
-
-    (nodemailer.createTransport as jest.Mock).mockReturnValue(mockTransporter);
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         EmailService,
@@ -24,10 +24,7 @@ describe('EmailService', () => {
           useValue: {
             get: jest.fn().mockImplementation((key: string) => {
               const config = {
-                'SMTP_HOST': 'smtp.example.com',
-                'SMTP_PORT': 587,
-                'SMTP_USER': 'user',
-                'SMTP_PASS': 'pass',
+                'RESEND_API_KEY': 'test-api-key',
                 'SMTP_FROM': 'noreply@example.com',
                 'APP_URL': 'http://localhost:3000',
               };
@@ -39,6 +36,7 @@ describe('EmailService', () => {
     }).compile();
 
     service = module.get<EmailService>(EmailService);
+    mockResend = (service as any).resend;
   });
 
   describe('sendLoginLink', () => {
@@ -48,13 +46,28 @@ describe('EmailService', () => {
 
       await service.sendLoginLink(email, token);
 
-      expect(mockTransporter.sendMail).toHaveBeenCalledWith(
+      expect(mockResend.emails.send).toHaveBeenCalledWith(
         expect.objectContaining({
           to: email,
           subject: 'Your CodeCon Login Link',
           html: expect.stringContaining(token),
         })
       );
+    });
+
+    it('should throw error when email sending fails', async () => {
+      const email = 'test@example.com';
+      const token = 'test-token';
+      const errorMessage = 'Failed to send';
+
+      mockResend.emails.send.mockResolvedValueOnce({ 
+        data: null, 
+        error: { message: errorMessage, name: 'Error', statusCode: 500 } 
+      });
+
+      await expect(service.sendLoginLink(email, token))
+        .rejects
+        .toThrow(`Failed to send login email: ${errorMessage}`);
     });
   });
 });

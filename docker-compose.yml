@@ -15,12 +15,9 @@ services:
       - GITHUB_CLIENT_ID=seu_github_client_id
       - GITHUB_CLIENT_SECRET=seu_github_client_secret
       - NODE_ENV=development
-      - SMTP_HOST=smtp.example.com
-      - SMTP_PORT=587
-      - SMTP_USER=your-smtp-user
-      - SMTP_PASS=your-smtp-password
       - SMTP_FROM=noreply@codecon.com
       - APP_URL=http://localhost:3000
+      - RESEND_API_KEY=your_resend_api_key
     volumes:
       - .:/app
       - /app/node_modules

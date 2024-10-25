@@ -1,27 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 @Injectable()
 export class EmailService {
-  private transporter: nodemailer.Transporter;
+  private resend: Resend;
 
   constructor(private configService: ConfigService) {
-    this.transporter = nodemailer.createTransport({
-      host: this.configService.get('SMTP_HOST'),
-      port: this.configService.get('SMTP_PORT'),
-      secure: true,
-      auth: {
-        user: this.configService.get('SMTP_USER'),
-        pass: this.configService.get('SMTP_PASS'),
-      },
-    });
+    this.resend = new Resend(this.configService.get('RESEND_API_KEY'));
   }
 
   async sendLoginLink(email: string, token: string): Promise<void> {
     const loginUrl = `${this.configService.get('APP_URL')}/auth/verify?token=${token}`;
 
-    await this.transporter.sendMail({
+    const { error } = await this.resend.emails.send({
       from: this.configService.get('SMTP_FROM'),
       to: email,
       subject: 'Your CodeCon Login Link',
@@ -31,12 +23,16 @@ export class EmailService {
         <p>This link will expire in 15 minutes.</p>
       `,
     });
+
+    if (error) {
+      throw new Error(`Failed to send login email: ${error.message}`);
+    }
   }
 
   async sendRegistrationLink(email: string, token: string): Promise<void> {
     const registrationUrl = `${this.configService.get('APP_URL')}/auth/register/verify?token=${token}`;
 
-    await this.transporter.sendMail({
+    const { error } = await this.resend.emails.send({
       from: this.configService.get('SMTP_FROM'),
       to: email,
       subject: 'Complete Your CodeCon Registration',
@@ -46,5 +42,9 @@ export class EmailService {
         <p>This link will expire in 15 minutes.</p>
       `,
     });
+
+    if (error) {
+      throw new Error(`Failed to send registration email: ${error.message}`);
+    }
   }
 }
