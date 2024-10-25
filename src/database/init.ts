@@ -16,7 +16,7 @@ const AppDataSource = new DataSource({
   synchronize: true, // Be careful with this in production
 });
 
-async function initializeDatabase() {
+export async function initializeDatabase() {
   console.log('Starting database initialization...');
 
   try {
@@ -27,19 +27,22 @@ async function initializeDatabase() {
 
     const attendees = [
       {
-        name: 'John Doe',
+        firstName: 'John',
+        lastName: 'Doe',
         email: 'john@example.com',
         company: 'Tech Corp',
         points: 100,
       },
       {
-        name: 'Jane Smith',
+        firstName: 'Jane',
+        lastName: 'Smith',
         email: 'jane@example.com',
         company: 'Dev Inc',
         points: 150,
       },
       {
-        name: 'Bob Johnson',
+        firstName: 'Bob',
+        lastName: 'Johnson',
         email: 'bob@example.com',
         company: 'Code LLC',
         points: 75,
@@ -49,7 +52,7 @@ async function initializeDatabase() {
     console.log(`Inserting ${attendees.length} sample attendees...`);
     for (const attendee of attendees) {
       await attendeeRepository.save(attendee);
-      console.log(`Inserted attendee: ${attendee.name}`);
+      console.log(`Inserted attendee: ${attendee.firstName} ${attendee.lastName}`);
     }
 
     console.log('All sample attendees inserted successfully.');
@@ -62,6 +65,9 @@ async function initializeDatabase() {
   }
 }
 
-initializeDatabase()
-  .then(() => console.log('Database initialization completed successfully.'))
-  .catch((error) => console.error('Database initialization failed:', error));
+// Only run if this script is executed directly
+if (require.main === module) {
+  initializeDatabase()
+    .then(() => console.log('Database initialization completed successfully.'))
+    .catch((error) => console.error('Database initialization failed:', error));
+}

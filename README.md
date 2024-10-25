@@ -36,7 +36,15 @@ Este projeto está configurado para ser executado inteiramente com Docker, inclu
    cd codecon-api
    ```
 
-3. Construa e inicie os contêineres:
+3. Copie o arquivo de exemplo de variáveis de ambiente:
+
+   ```sh
+   cp .env.example .env
+   ```
+
+   Edite o arquivo `.env` com as configurações apropriadas.
+
+4. Construa e inicie os contêineres:
 
    ```sh
    docker-compose up --build
@@ -44,7 +52,7 @@ Este projeto está configurado para ser executado inteiramente com Docker, inclu
 
    Isso iniciará tanto a API quanto o banco de dados PostgreSQL. A API estará disponível em http://localhost:3000/
 
-4. Para parar os contêineres, use:
+5. Para parar os contêineres, use:
    ```sh
    docker-compose down
    ```
@@ -89,19 +97,22 @@ A partir daqui, você pode executar comandos npm, modificar arquivos (as altera�
 - `pnpm run test:e2e`: Executa testes end-to-end
 - `pnpm run test:cov`: Executa testes com cobertura
 - `pnpm run tree`: Gera uma árvore do projeto para ser usada em Prompts de IA
+- `pnpm run db:reset`: Reseta o banco de dados
 
-## 🔒 Variáveis de Ambiente
+## 🧪 Testando Endpoints da API
 
-Certifique-se de configurar as seguintes variáveis de ambiente no seu arquivo `.env`:
+Este projeto inclui um arquivo `auth.http` para facilitar o teste da API usando a extensão REST Client no Visual Studio Code.
 
-- `DATABASE_URL`: String de conexão do PostgreSQL
-- `SUPABASE_URL`: URL do projeto Supabase
-- `SUPABASE_KEY`: Chave da API do Supabase
-- `RESEND_API_KEY`: Chave da API Resend para serviços de e-mail
+1. Instale a extensão [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) no VS Code.
+2. Abra o arquivo `auth.http`.
+3. Clique em "Send Request" acima de cada requisição para testar os endpoints.
+4. Para rotas protegidas, substitua `{{authToken}}` pelo token real recebido na resposta de login.
+
+Nota: Certifique-se de que a API esteja rodando localmente antes de testar.
 
 ## 📚 Documentação da API
 
-A documentação da API est�� disponível em `/api-docs` ao executar a aplicação. (A FAZER)
+A documentação da API está disponível em `/api-docs` ao executar a aplicação. (A FAZER)
 
 ## 🤝 Contribuindo
 

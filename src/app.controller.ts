@@ -7,11 +7,12 @@ export class AppController {
 
   @Get()
   async getHello(): Promise<string> {
-    const attendees = await this.appService.getAttendees();
-    if (attendees.length > 0) {
-      return `Welcome to CodeCon API! We have ${attendees.length} attendees. First attendee: ${attendees[0].name}`;
+    const users = await this.appService.getUsers();
+    if (users.length > 0) {
+      const userList = users.map(user => user.name || user.email).join(', ');
+      return `Welcome to CodeCon API! We have ${users.length} users. Users: ${userList}`;
     } else {
-      return 'Welcome to CodeCon API! No attendees registered yet.';
+      return 'Welcome to CodeCon API! No users registered yet.';
     }
   }
 }

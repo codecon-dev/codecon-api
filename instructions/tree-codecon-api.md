@@ -2,6 +2,7 @@
 ├── Dockerfile
 ├── LICENSE
 ├── README.md
+├── auth.http
 ├── docker-compose.yml
 ├── docker-entrypoint.sh
 ├── instructions
@@ -9,6 +10,7 @@
 │   ├── project.md
 │   ├── structure.md
 │   └── tree-codecon-api.md
+├── jest.config.js
 ├── nest-cli.json
 ├── package.json
 ├── pnpm-lock.yaml
@@ -17,6 +19,13 @@
 │   ├── app.controller.ts
 │   ├── app.module.ts
 │   ├── app.service.ts
+│   ├── auth
+│   │   ├── auth.controller.ts
+│   │   ├── auth.module.ts
+│   │   ├── auth.service.spec.ts
+│   │   ├── auth.service.ts
+│   │   ├── guards
+│   │   └── strategies
 │   ├── common
 │   │   └── interfaces
 │   ├── database
@@ -24,8 +33,11 @@
 │   ├── entities
 │   │   └── attendee.entity.ts
 │   ├── main.ts
-│   └── modules
-│       └── auth
+│   └── users
+│       ├── dto
+│       ├── entities
+│       ├── users.module.ts
+│       └── users.service.ts
 ├── test
 │   ├── app.e2e-spec.ts
 │   ├── auth
@@ -33,4 +45,4 @@
 ├── tsconfig.build.json
 └── tsconfig.json
 
-11 directories, 23 files
+15 directories, 31 files

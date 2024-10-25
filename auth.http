@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3000
+@email = test@example.com
+@password = password123
+
+### Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "name": "Test User"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Get current user (Protected route)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+
+### Variables
+@authToken = # Paste the access_token from the login response here
+
+### Social Login (Simulated)
+POST {{baseUrl}}/auth/social
+Content-Type: application/json
+
+{
+  "email": "social@example.com",
+  "name": "Social User",
+  "provider": "google",
+  "providerId": "googleId123"
+}

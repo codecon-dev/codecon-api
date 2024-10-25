@@ -1,10 +1,13 @@
 #!/bin/sh
 
-# Run database migrations
-# npm run migration:run
+set -e
 
-# Run database seed (if we have one in the future)
-# npm run seed
+if [ "$RESET_DB" = "true" ]; then
+    echo "Resetting database..."
+    pnpm run db:reset
+else
+    echo "Skipping database reset."
+fi
 
-# Start the application
-exec npm run start:prod
+# Execute the command passed to docker run
+exec "$@"

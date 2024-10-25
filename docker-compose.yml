@@ -9,8 +9,18 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=your_password
       - DB_NAME=codecon_api
+      - JWT_SECRET=your_secret
+      - GOOGLE_CLIENT_ID=seu_google_client_id
+      - GOOGLE_CLIENT_SECRET=seu_google_client_secret
+      - GITHUB_CLIENT_ID=seu_github_client_id
+      - GITHUB_CLIENT_SECRET=seu_github_client_secret
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
     depends_on:
       - db
+    command: pnpm run start:dev
   db:
     image: postgres:16
     environment:
@@ -21,17 +31,6 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
-  test:
-    build: .
-    command: pnpm test
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=your_password
-      - DB_NAME=codecon_api_test
-    depends_on:
-      - db
 
 volumes:
   postgres_data:
