@@ -27,7 +27,7 @@
     "shell": "docker compose exec app sh",
     "migrate": "docker compose exec app npm run migrate",
     "seed": "docker compose exec app npm run seed",
-    "tree": "tree -L 3 -I 'node_modules|.git|dist|data' > instructions/tree-codecon-api.md",
+    "tree": "tree  --noreport -I 'node_modules|.git|dist|data' > instructions/tree-codecon-api.md",
     "db:reset": "ts-node src/database/resetDatabase.ts"
   },
   "dependencies": {

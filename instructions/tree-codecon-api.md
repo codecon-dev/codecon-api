@@ -25,9 +25,12 @@
 │   │   ├── auth.service.spec.ts
 │   │   ├── auth.service.ts
 │   │   ├── guards
+│   │   │   └── local-auth.guard.ts
 │   │   └── strategies
-│   ├── common
-│   │   └── interfaces
+│   │       ├── github.strategy.ts
+│   │       ├── google.strategy.ts
+│   │       ├── jwt.strategy.ts
+│   │       └── local.strategy.ts
 │   ├── database
 │   │   └── init.ts
 │   ├── entities
@@ -35,7 +38,9 @@
 │   ├── main.ts
 │   └── users
 │       ├── dto
+│       │   └── create-user.dto.ts
 │       ├── entities
+│       │   └── user.entity.ts
 │       ├── users.module.ts
 │       └── users.service.ts
 ├── test
@@ -44,5 +49,3 @@
 │   └── jest-e2e.json
 ├── tsconfig.build.json
 └── tsconfig.json
-
-15 directories, 31 files
