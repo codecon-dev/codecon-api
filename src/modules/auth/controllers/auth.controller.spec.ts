@@ -34,7 +34,12 @@ describe('AuthController', () => {
         password: 'Password123!',
         name: 'Test User',
       };
-      const expectedResult = { id: 'uuid', ...createUserDto };
+      const expectedResult = { 
+        id: 'uuid', 
+        ...createUserDto,
+        provider: null,
+        providerId: null
+      };
 
       jest.spyOn(authService, 'register').mockResolvedValue(expectedResult);
 

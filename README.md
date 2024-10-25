@@ -112,7 +112,7 @@ Nota: Certifique-se de que a API esteja rodando localmente antes de testar.
 
 ## 📚 Documentação da API
 
-A documentação da API está disponível em `/api-docs` ao executar a aplicação. (A FAZER)
+A documentação da API está disponível em `/api-docs` ao executar a aplicação.
 
 ## 🤝 Contribuindo
 
