@@ -5,15 +5,37 @@ import { EmailService } from '../../shared/services/email.service';
 import { CreateUserDto } from '../../users/dtos/create-user.dto';
 import { User } from '../../users/entities/user.entity';
 import { UsersService } from '../../users/services/users.service';
+import { LoginDto } from '../dto/login.dto';
 import { AuthResponse } from '../interfaces/auth-response.interface';
 
 @Injectable()
 export class AuthService {
+  private readonly PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
   ) { }
+
+  private async comparePasswords(plaintext: string, hashed: string): Promise<boolean> {
+    return bcrypt.compare(plaintext, hashed);
+  }
+
+  async login(loginDto: LoginDto): Promise<AuthResponse> {
+    if (!this.PASSWORD_REGEX.test(loginDto.password)) {
+      throw new UnauthorizedException('Invalid password format');
+    }
+    const user = await this.usersService.findByEmail(loginDto.email);
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    const isPasswordValid = await this.comparePasswords(loginDto.password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    return this.generateAuthResponse(user);
+  }
 
   async register(createUserDto: CreateUserDto): Promise<User> {
     const existingUser = await this.usersService.findByEmail(createUserDto.email);
@@ -71,21 +93,17 @@ export class AuthService {
     }
   }
 
-  async validateUser(email: string, password: string): Promise<any> {
+  async validateUser(email: string, password: string): Promise<Omit<User, 'password'> | null> {
     const user = await this.usersService.findByEmail(email);
-    if (!user || !user.password || !user.authMethods.includes('password')) {
+    if (!user) {
       return null;
     }
-
-    if (await bcrypt.compare(password, user.password)) {
-      const { password, ...result } = user;
-      return result;
+    const isPasswordValid = await this.comparePasswords(password, user.password);
+    if (!isPasswordValid) {
+      return null;
     }
-    return null;
-  }
-
-  async login(user: User): Promise<AuthResponse> {
-    return this.generateAuthResponse(user);
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 
   async loginSocial(userData: any): Promise<AuthResponse> {
