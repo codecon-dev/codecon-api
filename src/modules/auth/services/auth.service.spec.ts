@@ -202,8 +202,12 @@ describe('AuthService', () => {
       const expires = new Date();
       expires.setMinutes(expires.getMinutes() + 15);
 
-      // Set up the token in the Map
-      (authService as any).otpTokens.set(token, { email, expires });
+      // Set up the token in the Map with correct type
+      (authService as any).otpTokens.set(token, { 
+        email, 
+        expires,
+        type: 'login' // Add the type property
+      });
 
       (usersService.findByEmail as jest.Mock).mockResolvedValue(user);
       (jwtService.sign as jest.Mock).mockReturnValue(jwtToken);
@@ -213,7 +217,6 @@ describe('AuthService', () => {
       expect(result).toEqual({ access_token: jwtToken });
       expect(usersService.findByEmail).toHaveBeenCalledWith(email);
       expect(jwtService.sign).toHaveBeenCalledWith({ sub: user.id });
-      // Verify token was deleted
       expect((authService as any).otpTokens.has(token)).toBeFalsy();
     });
 

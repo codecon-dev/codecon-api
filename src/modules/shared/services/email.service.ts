@@ -32,4 +32,19 @@ export class EmailService {
       `,
     });
   }
+
+  async sendRegistrationLink(email: string, token: string): Promise<void> {
+    const registrationUrl = `${this.configService.get('APP_URL')}/auth/register/verify?token=${token}`;
+
+    await this.transporter.sendMail({
+      from: this.configService.get('SMTP_FROM'),
+      to: email,
+      subject: 'Complete Your CodeCon Registration',
+      html: `
+        <p>Click the link below to complete your registration for CodeCon:</p>
+        <p><a href="${registrationUrl}">${registrationUrl}</a></p>
+        <p>This link will expire in 15 minutes.</p>
+      `,
+    });
+  }
 }

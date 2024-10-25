@@ -11,6 +11,15 @@ export class CreateUserDto {
   email: string;
 
   @ApiProperty({
+    description: 'The full name of the user (optional for email registration)',
+    example: 'John Doe',
+    required: false
+  })
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @ApiProperty({
     description: 'The password for the account',
     example: 'StrongP@ssw0rd'
   })
@@ -21,15 +30,6 @@ export class CreateUserDto {
   })
   @IsOptional()
   password?: string;
-
-  @ApiProperty({
-    description: 'The full name of the user',
-    example: 'John Doe'
-  })
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  name: string;
 
   @IsString()
   @IsOptional()

@@ -116,4 +116,29 @@ export class AuthController {
   async verifyLoginToken(@Query('token') token: string) {
     return this.authService.verifyLoginToken(token);
   }
+
+  @ApiOperation({ summary: 'Register with email only' })
+  @ApiResponse({ status: 200, description: 'Registration link sent if email is not registered' })
+  @Post('register/email')
+  async registerWithEmail(@Body() body: { email: string }) {
+    await this.authService.registerWithEmail(body.email);
+    return { message: 'If the email is not registered, a registration link has been sent' };
+  }
+
+  @ApiOperation({ summary: 'Complete registration with email token' })
+  @ApiResponse({ 
+    status: 200, 
+    description: 'Registration completed successfully',
+    schema: {
+      properties: {
+        access_token: { type: 'string' }
+      }
+    }
+  })
+  @Post('register/verify')
+  async completeRegistration(
+    @Body() body: { token: string; name: string }
+  ) {
+    return this.authService.completeRegistration(body.token, body.name);
+  }
 }

@@ -2,6 +2,23 @@
 @email = test@example.com
 @password = Password123@
 
+### Register with email only
+POST {{baseUrl}}/auth/register/email
+Content-Type: application/json
+
+{
+  "email": "{{email}}"
+}
+
+### Complete registration
+POST {{baseUrl}}/auth/register/verify
+Content-Type: application/json
+
+{
+  "token": "<registration-token>",
+  "name": "Test User"
+}
+
 ### Register a new user
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
@@ -64,3 +81,4 @@ GET {{baseUrl}}/auth/github/callback
 #    - After authorization, you'll be redirected back to the callback URL
 #
 # 3. The @authToken variable should be set with the access_token from any successful login response
+
