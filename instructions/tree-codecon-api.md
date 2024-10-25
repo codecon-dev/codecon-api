@@ -19,13 +19,8 @@
 │   ├── app.controller.ts
 │   ├── app.module.ts
 │   ├── app.service.ts
-│   ├── config
-│   │   └── configuration.ts
 │   ├── main.ts
 │   └── modules
-│       ├── attendees
-│       │   └── entities
-│       │       └── attendee.entity.ts
 │       ├── auth
 │       │   ├── auth.module.ts
 │       │   ├── controllers
@@ -34,6 +29,7 @@
 │       │   ├── guards
 │       │   │   └── local-auth.guard.ts
 │       │   ├── services
+│       │   │   ├── auth-email-registration.spec.ts
 │       │   │   ├── auth.service.spec.ts
 │       │   │   └── auth.service.ts
 │       │   └── strategies

@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Attendee } from './modules/attendees/entities/attendee.entity';
 import { AuthModule } from './modules/auth/auth.module';
 import { User } from './modules/users/entities/user.entity';
 import { UsersModule } from './modules/users/users.module';
@@ -23,7 +22,7 @@ import { UsersModule } from './modules/users/users.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // Not recommended for production
     }),
-    TypeOrmModule.forFeature([Attendee, User]),
+    TypeOrmModule.forFeature([User]),
     AuthModule,
     UsersModule,
   ],
