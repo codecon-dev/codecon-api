@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 @email = test@example.com
-@password = password123
+@password = Password123@
 
 ### Register a new user
 POST {{baseUrl}}/auth/register

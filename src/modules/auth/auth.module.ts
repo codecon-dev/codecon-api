@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
@@ -25,8 +27,23 @@ import { LocalStrategy } from './strategies/local.strategy';
       inject: [ConfigService],
     }),
     UsersModule,
+    ThrottlerModule.forRoot([{
+      ttl: 60000, // 1 minute
+      limit: 10, // 10 requests per minute
+    }]),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, GoogleStrategy, GithubStrategy, EmailService],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    GoogleStrategy,
+    GithubStrategy,
+    EmailService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
   controllers: [AuthController],
 })
 export class AuthModule { }
