@@ -4,7 +4,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from '../../users/dtos/create-user.dto';
 import { User } from '../../users/entities/user.entity';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
-import { AuthService, AuthResponse } from '../services/auth.service';
+import { AuthService } from '../services/auth.service';
+import { AuthResponse } from '../interfaces/auth-response.interface';
 
 @ApiTags('auth')
 @Controller('auth')

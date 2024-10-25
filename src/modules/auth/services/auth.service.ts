@@ -5,12 +5,7 @@ import { EmailService } from '../../shared/services/email.service';
 import { CreateUserDto } from '../../users/dtos/create-user.dto';
 import { User } from '../../users/entities/user.entity';
 import { UsersService } from '../../users/services/users.service';
-
-export interface AuthResponse {
-  accessToken: string;
-  refreshToken: string;
-  expiresIn: number;
-}
+import { AuthResponse } from '../interfaces/auth-response.interface';
 
 @Injectable()
 export class AuthService {

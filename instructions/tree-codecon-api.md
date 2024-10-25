@@ -28,9 +28,9 @@
 │       │   │   └── auth.controller.ts
 │       │   ├── guards
 │       │   │   └── local-auth.guard.ts
+│       │   ├── interfaces
+│       │   │   └── auth-response.interface.ts
 │       │   ├── services
-│       │   │   ├── auth-email-registration.spec.ts
-│       │   │   ├── auth.service.spec.ts
 │       │   │   └── auth.service.ts
 │       │   └── strategies
 │       │       ├── github.strategy.ts
@@ -39,7 +39,6 @@
 │       │       └── local.strategy.ts
 │       ├── shared
 │       │   └── services
-│       │       ├── email.service.spec.ts
 │       │       └── email.service.ts
 │       └── users
 │           ├── dtos
