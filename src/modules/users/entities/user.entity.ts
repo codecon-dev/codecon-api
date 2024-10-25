@@ -1,6 +1,8 @@
 import { Exclude } from 'class-transformer';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+export type AuthMethod = 'password' | 'magic-link' | 'google' | 'github';
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -9,16 +11,19 @@ export class User {
   @Column()
   email: string;
 
-  @Exclude()
-  @Column()
-  password?: string;
-
   @Column()
   name: string;
 
+  @Exclude()
   @Column({ nullable: true })
-  provider: string;
+  password?: string;
+
+  @Column('simple-array', { default: [] })
+  authMethods: AuthMethod[];
 
   @Column({ nullable: true })
-  providerId: string;
+  provider?: string;
+
+  @Column({ nullable: true })
+  providerId?: string;
 }

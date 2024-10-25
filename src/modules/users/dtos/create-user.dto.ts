@@ -1,5 +1,6 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsArray, IsEmail, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from 'class-validator';
+import { AuthMethod } from '../entities/user.entity';
 
 export class CreateUserDto {
   @ApiProperty({
@@ -11,9 +12,8 @@ export class CreateUserDto {
   email: string;
 
   @ApiProperty({
-    description: 'The full name of the user (optional for email registration)',
-    example: 'John Doe',
-    required: false
+    description: 'The full name of the user',
+    example: 'John Doe'
   })
   @IsString()
   @IsOptional()
@@ -30,6 +30,10 @@ export class CreateUserDto {
   })
   @IsOptional()
   password?: string;
+
+  @IsArray()
+  @IsOptional()
+  authMethods?: AuthMethod[];
 
   @IsString()
   @IsOptional()

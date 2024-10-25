@@ -4,7 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from '../../users/dtos/create-user.dto';
 import { User } from '../../users/entities/user.entity';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
-import { AuthService } from '../services/auth.service';
+import { AuthService, AuthResponse } from '../services/auth.service';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -37,7 +37,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized - Invalid credentials' })
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req) {
+  async login(@Request() req): Promise<AuthResponse> {
     return this.authService.login(req.user);
   }
 
@@ -59,7 +59,7 @@ export class AuthController {
   })
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
-  async googleCallback(@Request() req) {
+  async googleCallback(@Request() req): Promise<AuthResponse> {
     return this.authService.loginSocial(req.user);
   }
 
@@ -81,7 +81,7 @@ export class AuthController {
   })
   @Get('github/callback')
   @UseGuards(AuthGuard('github'))
-  async githubCallback(@Request() req) {
+  async githubCallback(@Request() req): Promise<AuthResponse> {
     return this.authService.loginSocial(req.user);
   }
 
@@ -113,7 +113,7 @@ export class AuthController {
   })
   @ApiResponse({ status: 401, description: 'Invalid or expired token' })
   @Get('verify')
-  async verifyLoginToken(@Query('token') token: string) {
+  async verifyLoginToken(@Query('token') token: string): Promise<AuthResponse> {
     return this.authService.verifyLoginToken(token);
   }
 
@@ -138,7 +138,7 @@ export class AuthController {
   @Post('register/verify')
   async completeRegistration(
     @Body() body: { token: string; name: string }
-  ) {
+  ): Promise<AuthResponse> {
     return this.authService.completeRegistration(body.token, body.name);
   }
 }

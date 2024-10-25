@@ -14,6 +14,11 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
+  async update(id: string, updateData: Partial<User>): Promise<User> {
+    await this.usersRepository.update(id, updateData);
+    return this.findById(id);
+  }
+
   async findByEmail(email: string): Promise<User | undefined> {
     return this.usersRepository.findOne({ where: { email } });
   }
