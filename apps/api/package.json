@@ -15,7 +15,6 @@
     "@repo/design-system": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/observability": "workspace:*",
-    "@repo/payments": "workspace:*",
     "@sentry/nextjs": "^8.38.0",
     "@repo/next-config": "workspace:*",
     "next": "15.0.3",

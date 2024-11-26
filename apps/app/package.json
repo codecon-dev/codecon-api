@@ -12,7 +12,6 @@
     "@prisma/client": "5.22.0",
     "@repo/auth": "workspace:*",
     "@repo/analytics": "workspace:*",
-    "@repo/collaboration": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/design-system": "workspace:*",
     "@repo/env": "workspace:*",
