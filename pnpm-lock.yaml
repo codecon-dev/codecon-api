@@ -47,6 +47,9 @@ importers:
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@repo/events':
+        specifier: workspace:*
+        version: link:../../packages/events
       '@repo/next-config':
         specifier: workspace:*
         version: link:../../packages/next-config
@@ -123,9 +126,6 @@ importers:
       '@repo/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
-      '@repo/webhooks':
-        specifier: workspace:*
-        version: link:../../packages/webhooks
       '@sentry/nextjs':
         specifier: ^8.38.0
         version: 8.38.0(@opentelemetry/core@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.54.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.13)))
@@ -576,6 +576,28 @@ importers:
         specifier: ^5.6.3
         version: 5.6.3
 
+  packages/events:
+    dependencies:
+      server-only:
+        specifier: ^0.0.1
+        version: 0.0.1
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: 22.9.0
+        version: 22.9.0
+      '@types/react':
+        specifier: 18.3.12
+        version: 18.3.12
+      '@types/react-dom':
+        specifier: ^18.3.1
+        version: 18.3.1
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
+
   packages/feature-flags:
     dependencies:
       '@repo/analytics':
@@ -739,25 +761,6 @@ importers:
         version: 2.1.5(@types/node@22.9.0)(jsdom@25.0.1(bufferutil@4.0.8))(terser@5.31.0)
 
   packages/typescript-config: {}
-
-  packages/webhooks:
-    dependencies:
-      '@repo/auth':
-        specifier: workspace:*
-        version: link:../auth
-      '@repo/env':
-        specifier: workspace:*
-        version: link:../env
-      svix:
-        specifier: ^1.40.0
-        version: 1.40.0
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      typescript:
-        specifier: ^5.6.3
-        version: 5.6.3
 
 packages:
 
