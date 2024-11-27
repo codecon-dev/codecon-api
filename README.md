@@ -1,6 +1,6 @@
 # Codecon App
 
-[![https://img.shields.io/badge/framework%20next-forge-red](https://img.shields.io/badge/framework%20next-forge-E0234E)](https://www.next-forge.com/)
+[![https://img.shields.io/badge/framework%20nextforge-red](https://img.shields.io/badge/framework%20nextforge-E0234E)](https://www.next-forge.com/)
 [![https://img.shields.io/badge/feito%20com-nextjs-red](https://img.shields.io/badge/feito%20com-nextjs-E0234E)](https://nextjs.org/)
 [![https://img.shields.io/badge/banco%20de%20dados-postgresql-blue](https://img.shields.io/badge/banco%20de%20dados-postgresql-336791)](https://www.postgresql.org/)
 [![https://img.shields.io/badge/powered%20by-supabase-green](https://img.shields.io/badge/powered%20by-supabase-3ECF8E)](https://supabase.com/)
@@ -34,7 +34,8 @@ O App do Codecon é um monorepo baseado em next-forge que serve como espinha dor
 Certifique-se de configurar as seguintes variáveis de ambiente no seu arquivo `.env.local` nas pastas `/apps/app` e `/apps/api`:
 
 - `CLERK_SECRET_KEY`: Chave de API da Clerk
-- `CLERK_WEBHOOK_SECRET`: Secret do Webhook da Clerk enviado pela nossa aplicação
+- `CLERK_WEBHOOK_SECRET`: Secret do Webhook da Clerk recebido pela nossa aplicação
+- `EVEN3_WEBHOOK_SECRET`: Secret do Webhook da Even3 recebido pela nossa aplicação
 - `RESEND_AUDIENCE_ID`: ID da audiência no Resend
 - `RESEND_FROM`: E-mail que será o remetente dos e-mails transacionais
 - `DATABASE_URL`: String de conexão com o PostgreSQL
@@ -43,7 +44,6 @@ Certifique-se de configurar as seguintes variáveis de ambiente no seu arquivo `
 - `BETTERSTACK_URL`: URL da status page do BetterStack
 - `FLAGS_SECRET`: Secret para uso de features flags
 - `ARCJET_KEY`: Chave de API da ArcJet
-- `SVIX_TOKEN`: Chave da API da Svix
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Chave publicável do Clerk
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Código do Google Analytics
 - `NEXT_PUBLIC_POSTHOG_KEY`: Código do PostHog
@@ -60,10 +60,6 @@ Também configure a variável de ambiente do banco de dados no arquivo `.env` de
 - http://localhost:3002/ — A API
 - http://localhost:3003/ — Preview de e-mails
 - http://localhost:3004/ — Documentação da API
-
-## 📚 Documentação da API
-
-A documentação da API está acessando o endereço `http://localhost:3004/`
 
 ## 📚 Documentação next-forge
 

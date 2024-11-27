@@ -1,5 +1,4 @@
 import { auth, currentUser } from '@repo/auth/server';
-import { authenticate } from '@repo/collaboration/auth';
 import { tailwind } from '@repo/tailwind-config';
 
 const COLORS = [
@@ -30,7 +29,7 @@ export const POST = async () => {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  return authenticate({
+  return {
     userId: user.id,
     orgId,
     userInfo: {
@@ -39,5 +38,5 @@ export const POST = async () => {
       avatar: user.imageUrl ?? undefined,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
     },
-  });
+  };
 };
